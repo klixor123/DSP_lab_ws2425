@@ -73,6 +73,11 @@
             "showDevDebugOutput": "raw",  // one of: "raw", "parsed", "both", "vscode"
             //"showDevDebugTimestamps": true,
 
+            "postLaunchCommands": [
+                "monitor arm semihosting enable"
+            ],
+
+            "runToEntryPoint": "main",
         },
     ]
 }

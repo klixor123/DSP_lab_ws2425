@@ -13,7 +13,7 @@
 OUTPUT_FORMAT ("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
 /*ENTRY(main)*/
 SEARCH_DIR(.)
-GROUP(libgcc.a libc.a libm.a libnosys.a)
+GROUP(libc.a librdimon.a)
 MEMORY
 {
    ROM   (rx)   : ORIGIN = 0x00000000, LENGTH = 2048K

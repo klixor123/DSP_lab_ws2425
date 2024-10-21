@@ -8,8 +8,19 @@ extern "C"
 
 
 
+// needed for semihosting
+extern "C" void initialise_monitor_handles(void);
+
+
+
+
 int main()
 {
+#ifdef SEMIHOSTING
+    // needed for semihosting
+    initialise_monitor_handles();
+#endif
+
    	// Initialize platform resources: I2S, I2C and UART interfaces, CODEC, GPIO for LED, user button and test pin
 	//platform_init(BAUDRATE, SAMPLERATE, line_in, intr, I2S_HANDLER, NULL); // second pointer to interrupt handler only for DSTC needed
     

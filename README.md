@@ -1,14 +1,9 @@
-# Table of Contents
-
-[[TOC]]
-
-
 
 # General Information
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 This sample project is for Windows only. 
-Find all documentation under "docs/". All necessary downloads should be available under "downloads/" and all [download links](#download-links) are listed below.
+Find all documentation under "docs/". Most downloads should be available under "downloads/" and all [download links](#download-links) are listed below.
 
 
 
@@ -21,9 +16,11 @@ Find all documentation under "docs/". All necessary downloads should be availabl
     - recommended location: "C:/OpenOCD"
 1. Unpack CMake
     - recommended location: "C:/CMake"
-1. Check if Board identifies as ... in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
+1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
+1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 1. launch "hello_world.code-workspace"
-    - all required extension should load automatically
+    - all required extensions should load automatically
+
 
 
 
@@ -32,7 +29,7 @@ Find all documentation under "docs/". All necessary downloads should be availabl
 
 - add each required source file to the "target_sources" command in "CMakeLists.txt"
 - set a breakpoint at the entry point of main before debugging
-- select ... in the built-in "Run and Debug" extension before debugging
+- select "GDB debugger CMSIS-DAP" in the built-in "Run and Debug" extension before debugging
 
 Use the CMake extension to:
 1. Configure/Reconfigure
@@ -57,11 +54,11 @@ Use the CMake extension to:
 1. Use USB CN2
 1. Plug device in, check COM Port in Device Manager
 1. Run USBDirect, select MB9AF312K, downloaded .srec file and COM port
-1. click Full Operation (note: when reset required, unplug and replug USB and quickly press OK)
+1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
 1. Unplug USB
 1. Open J1
-1. Plug Device in again
-1. Check Device Manager for ... device
+1. Plug device in again
+1. Check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
 1. manually install the drivers ...
     - right click on device node in device manager, select "Update Driver"
     - "Browse...", "Let me pick...", "Have Disk", Select above dir
@@ -87,7 +84,7 @@ Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-link
 9. click Full Operation (note: when reset required, unplug and replug USB and quickly press OK)
 10. Unplug USB
 11. Open J1
-12. Plug Device in again
+12. Plug device in again
 13. Check Device Manager for J-Link device
 14. Download latest "J-Link Software and Documentation pack" and install
 15. manually install the drivers on J-Link and CDC device from C:\Program Files\SEGGER\JLink_V810c\USBDriver\x64

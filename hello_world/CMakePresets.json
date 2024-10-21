@@ -9,6 +9,7 @@
         {
             "name": "Base",
             "hidden": true,
+            "cmakeExecutable": "C:/CMake/cmake-3.30.5-windows-x86_64/bin/cmake.exe",
             "generator": "Ninja",
             "binaryDir": "build/${presetName}",
             "architecture": {
@@ -26,7 +27,7 @@
             "inherits": "Base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "config_compile_definitions": "DEBUG=1",
+                "config_compile_definitions": "DEBUG=1;SEMIHOSTING=1",
                 "config_compile_flags": "-O2"
             }
         },
@@ -35,7 +36,7 @@
             "inherits": "Base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "config_compile_definitions": "DEBUG=1",
+                "config_compile_definitions": "DEBUG=1;SEMIHOSTING=1",
                 "config_compile_flags": "-O0"
             }
         },

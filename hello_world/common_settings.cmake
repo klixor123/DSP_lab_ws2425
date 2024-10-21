@@ -55,6 +55,15 @@ list(APPEND cpp_compile_flags "-Wextra") # useful warnings which are not enabled
 list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 list(APPEND linker_flags "-Wl,--gc-sections")   # remove unused functions and data
 list(APPEND linker_flags "-Wl,-print-memory-usage")
+#list(APPEND linker_flags "--specs=nano.specs")
+#list(APPEND linker_flags "-u_printf_float")     # add floating point support for printf
+#list(APPEND linker_flags "-u_scanf_float")      # add floating point support for scanf
+#list(APPEND linker_flags "--specs=nosys.specs")     # disable syscalls
+#list(APPEND linker_flags "--specs=rdimon.specs")
+#list(APPEND linker_flags "-lc -lrdimon")
+#list(APPEND linker_flags "-specs=rdimon.specs")
+#list(APPEND linker_flags "-l rdimon --specs=rdimon.specs")
+
 
 
 # clear out default flags
