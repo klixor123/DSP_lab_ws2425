@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "hello_world"
+		}
+    ],
+    "settings": {},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools-extension-pack",
+			"marus25.cortex-debug"
+		]
+	},
+}
