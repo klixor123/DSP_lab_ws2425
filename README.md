@@ -96,6 +96,33 @@ instructions:
 	
 
 
+# How to use Semihosting
+
+These instructions should not be needed, but are included for completeness.  
+Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Notes_Semihosting.pdf" for more information.
+1. add following code in the file "hello_world/.vscode/launch.json" to the "GDB debugger CMSIS-DAP" configuration
+    ```JSON
+        "postLaunchCommands": [
+            "monitor arm semihosting enable"
+        ],
+    ```
+1. add following code before the main function
+    ```C
+    // needed for semihosting
+    extern "C" void initialise_monitor_handles(void);
+    ```
+1. add following code before calling printf() for the first time
+    ```C
+    // needed for semihosting
+    initialise_monitor_handles();
+    ```
+1. Modify the libraries included by the linker in "hello_world/ldscripts/s6e2cc_rom.ld"
+    ```
+    GROUP(libgcc.a libc.a librdimon.a libm.a libnosys.a)
+    ```
+1. use printf() to send messages via the debugger
+
+
 
 
 # Download-Links
