@@ -27,7 +27,7 @@
             "inherits": "Base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "config_compile_definitions": "DEBUG=1;SEMIHOSTING=1",
+                "config_compile_definitions": "DEBUG=1",
                 "config_compile_flags": "-O2"
             }
         },
@@ -36,7 +36,7 @@
             "inherits": "Base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "config_compile_definitions": "DEBUG=1;SEMIHOSTING=1",
+                "config_compile_definitions": "DEBUG=1",
                 "config_compile_flags": "-O0"
             }
         },

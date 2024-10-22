@@ -2,6 +2,7 @@
 # General Information
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
+The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
 This sample project is for Windows only. 
 Find all documentation under "docs/". Most downloads should be available under "downloads/" and all [download links](#download-links) are listed below.
 
@@ -18,7 +19,8 @@ Find all documentation under "docs/". Most downloads should be available under "
     - recommended location: "C:/CMake"
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
-1. launch "hello_world.code-workspace"
+1. Ready for using the project
+    - launch "hello_world.code-workspace"
     - all required extensions should load automatically
 
 
@@ -27,8 +29,10 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Usage of the project
 
-- add each required source file to the "target_sources" command in "CMakeLists.txt"
-- set a breakpoint at the entry point of main before debugging
+- use "IF_DEBUG(debug_print())" to sent debugging messages to the Serial Port Monitor
+    - debug_print() is automatically disabled in Release build
+    - debug_print() works exactly as printf()
+- add each required source file to the "target_sources" commands in "CMakeLists.txt"
 - select "GDB debugger CMSIS-DAP" in the built-in "Run and Debug" extension before debugging
 
 Use the CMake extension to:
@@ -36,7 +40,7 @@ Use the CMake extension to:
 1. Build the executable
 1. Debug the program
 
-- open the built-in Serial Monitor with the correct COM port before starting debugging or running the program to receive strings transferred via UART
+- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_print()
 
 
  
@@ -59,9 +63,6 @@ Use the CMake extension to:
 1. Open J1
 1. Plug device in again
 1. Check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
-1. manually install the drivers ...
-    - right click on device node in device manager, select "Update Driver"
-    - "Browse...", "Let me pick...", "Have Disk", Select above dir
 
 
 
@@ -97,11 +98,6 @@ instructions:
 
 
 
-
-
-
-
-
 # Download-Links
 
 check the "downloads/" folder of this sample project before downloading
@@ -112,15 +108,18 @@ https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
 OpenOCD:  
 https://github.com/openocd-org/openocd/releases/tag/v0.12.0
 
+CMake:  
+https://cmake.org/download/#latest
+
 CMSIS-DAP:  
 https://www.infineon.com/cms/en/product/gated-document/cmsis-dap-firmware-update-8ac78c8c7d0d8da4017d0f8b794075f4/
+
+Infineon FM4S6E2GMKitSetup_RevSB:  
+https://www.infineon.com/cms/en/product/evaluation-boards/fm4-176l-s6e2gm/#!designsupport
 
 J-Link-OB-MB9AF312K-Spansion:  
 https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-ob-spansion/
 
 J-Link Software and Documentation pack:  
 https://www.segger.com/downloads/jlink/
-
-CMakle
-https://cmake.org/download/#latest
 

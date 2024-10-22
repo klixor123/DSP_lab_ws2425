@@ -36,12 +36,6 @@
             // cortex-debug logging
             "showDevDebugOutput": "raw",  // one of: "raw", "parsed", "both", "vscode"
             //"showDevDebugTimestamps": true,
-
-            // Peripheral Viewer extension (mcu-debug.peripheral-viewer)
-            //"svdFile": "${workspaceRoot}/SVD/MK66F18.svd"
-            //"svdPath": "NXP::K32L3A60_DFP@15.0.0",
-            //"deviceName": "K32L3A60VPJ1A",
-            //"processorName": "cm4"
         },
 
         {
@@ -72,10 +66,6 @@
             // cortex-debug logging
             "showDevDebugOutput": "raw",  // one of: "raw", "parsed", "both", "vscode"
             //"showDevDebugTimestamps": true,
-
-            "postLaunchCommands": [
-                "monitor arm semihosting enable"
-            ],
 
             "runToEntryPoint": "main",
         },

@@ -6,7 +6,7 @@ include_guard(GLOBAL)
 
 
 # language standard
-set(CMAKE_C_STANDARD 11)    # 99 or 11
+set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS ON)  # produces -std=gnu11 which is gcc's default
 
@@ -30,7 +30,7 @@ list(APPEND common_compile_flags "-fsingle-precision-constant") # make floating 
 list(APPEND common_compile_flags "-Wall")
 list(APPEND common_compile_flags "-Wno-unused-function")
 list(APPEND common_compile_flags "-fno-tree-loop-distribute-patterns") # do not transform loops into memset/memcopy calls
-                                                                       # IMPORTANT: We need to turn off this optimization, otherwise our startup code fails.
+                                                                       # IMPORTANT: We need to turn off this optimization, otherwise the startup code fails.
 # config-specific flags from CMakePresets.json
 list(APPEND common_compile_flags "${config_compile_flags}")
 
@@ -55,14 +55,6 @@ list(APPEND cpp_compile_flags "-Wextra") # useful warnings which are not enabled
 list(APPEND linker_flags "-nostdlib")           # disable automatic linking of std libs
 list(APPEND linker_flags "-Wl,--gc-sections")   # remove unused functions and data
 list(APPEND linker_flags "-Wl,-print-memory-usage")
-#list(APPEND linker_flags "--specs=nano.specs")
-#list(APPEND linker_flags "-u_printf_float")     # add floating point support for printf
-#list(APPEND linker_flags "-u_scanf_float")      # add floating point support for scanf
-#list(APPEND linker_flags "--specs=nosys.specs")     # disable syscalls
-#list(APPEND linker_flags "--specs=rdimon.specs")
-#list(APPEND linker_flags "-lc -lrdimon")
-#list(APPEND linker_flags "-specs=rdimon.specs")
-#list(APPEND linker_flags "-l rdimon --specs=rdimon.specs")
 
 
 
@@ -82,3 +74,4 @@ list(JOIN asm_compile_flags " " CMAKE_ASM_FLAGS)
 list(JOIN c_compile_flags   " " CMAKE_C_FLAGS)
 list(JOIN cpp_compile_flags " " CMAKE_CXX_FLAGS)
 list(JOIN linker_flags      " " CMAKE_EXE_LINKER_FLAGS)
+

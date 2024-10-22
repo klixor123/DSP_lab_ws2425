@@ -125,7 +125,11 @@ void delay_us(unsigned int us) {
  delay_cycles(us * (CLK_FREQ / 1000000));
 }
 
-void delay_cycles(unsigned int cycles) {
+
+#pragma GCC push_options
+#pragma GCC optimize ("O0")
+void delay_cycles(unsigned int cycles)
+{
 	asm("LSRS r0, #2");
 	asm("BEQ done");
 	asm("loop:");
@@ -137,4 +141,4 @@ void delay_cycles(unsigned int cycles) {
 	asm("done:");
  	//asm("BX lr");
 }
-
+#pragma GCC pop_options
