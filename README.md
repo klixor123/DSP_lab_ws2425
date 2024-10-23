@@ -4,7 +4,7 @@
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
 This sample project is for Windows only. 
-Find all documentation under "docs/". Most downloads should be available under "downloads/" and all [download links](#download-links) are listed below.
+Find all documentation under "docs/". Most downloads should be available under "downloads/". All [download links](#download-links) are listed below.
 
 
 
@@ -29,18 +29,18 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Usage of the project
 
-- use "IF_DEBUG(debug_print())" to sent debugging messages to the Serial Port Monitor
-    - debug_print() is automatically disabled in Release build
-    - debug_print() works exactly as printf()
+- use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
+    - with "IF_DEBUG()", debug_printf() is automatically disabled in Release build
+    - debug_printf() works exactly as printf()
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
-- select "GDB debugger CMSIS-DAP" in the built-in "Run and Debug" extension before debugging
+- select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
 
 Use the CMake extension to:
 1. Configure/Reconfigure
 1. Build the executable
-1. Debug the program
 
-- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_print()
+- start debugging with the "Run and Debug" extension.
+- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
  
