@@ -9,7 +9,7 @@
         {
             "name": "Base",
             "hidden": true,
-            "cmakeExecutable": "C:/CMake/cmake-3.30.5-windows-x86_64/bin/cmake.exe",
+            "cmakeExecutable": "C:/CMake/bin/cmake.exe",
             "generator": "Ninja",
             "binaryDir": "build/${presetName}",
             "architecture": {

@@ -11,12 +11,14 @@ Find all documentation under "docs/". Most downloads should be available under "
 # Prerequisites for this sample project
 
 1. Unpack GCC
-    - recommended location: "C:/GCC" 
     - recommended release: 13.3 rel1
+    - recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
 1. Unpack OpenOCD 
-    - recommended location: "C:/OpenOCD"
+    - recommended location: "C:/OpenOCD/"
 1. Unpack CMake
-    - recommended location: "C:/CMake"
+    - recommended location: "C:/CMake/"
+1. Install Ninja
+    - run "winget install Ninja-build.Ninja" in a Terminal
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 1. Ready for using the project
@@ -70,7 +72,7 @@ Use the CMake extension to:
 
 # Flash J-Link FW on MB9AF312K
 
-These instructions should not be needed, but are included for completeness.  
+These instructions should not be needed, but are included for the sake of completeness.  
 Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-ob-spansion/ for more information.
 1. Install "USBVCOM Driver Installer.msi"
 2. Install "FLASH USB DIRECT Programmer.msi"
@@ -98,7 +100,7 @@ instructions:
 
 # How to use Semihosting
 
-These instructions should not be needed, but are included for completeness.  
+These instructions should not be needed, but are included for the sake of completeness.  
 Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Notes_Semihosting.pdf" for more information.
 1. add following code in the file "hello_world/.vscode/launch.json" to the "GDB debugger CMSIS-DAP" configuration
     ```JSON
