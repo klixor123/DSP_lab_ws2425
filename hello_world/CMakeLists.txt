@@ -5,6 +5,12 @@ cmake_minimum_required(VERSION 3.25)
 include(toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake)
 include(common_settings.cmake)
 
+# CMSIS Core library
+set(CMSISCORE "${CMAKE_CURRENT_LIST_DIR}/CMSIS/Core")
+
+# CMSIS DSP library
+set(CMSISDSP "${CMAKE_CURRENT_LIST_DIR}/CMSIS_DSP")
+
 
 # set up project and enable languages
 project(hello_world C CXX ASM)
@@ -12,17 +18,26 @@ project(hello_world C CXX ASM)
 # project specific defines
 list(APPEND compile_definitions "CORE_M4")
 list(APPEND compile_definitions "__CORTEX_M4F")
+list(APPEND compile_definitions "ARM_MATH_CM4")
+list(APPEND compile_definitions "__FPU_PRESENT=1")
+# list(APPEND compile_definitions "ARM_MATH_LOOPUNROLL")
+# list(APPEND compile_definitions "ARM_MATH_ROUNDING")
+
 
 # config-specific defines from CMakePresets.json
 list(APPEND compile_definitions ${config_compile_definitions})
 
 # project specific includes
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}")
-list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/cmsis")
+list(APPEND include_directories "${CMSISCORE}/Include")
+list(APPEND include_directories "${CMSISDSP}/Include")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/platform")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/S6E2CCA/PDL")
 
 
+# build CMSIS-DSP library
+add_subdirectory("${CMSISDSP}/Source" lib_dsp)
+target_compile_definitions(CMSISDSP PRIVATE ${compile_definitions} )
 
 
 #
@@ -47,6 +62,13 @@ add_custom_command(TARGET ${target_name} POST_BUILD
     VERBATIM
     )
 
+
+# add libs to link with
+target_link_libraries(${target_name} 
+    CMSISDSP
+    )
+
+    
 # add startup code to the project
 target_sources(${target_name} PRIVATE
     system/include/S6E2CCA/startup/startup_s6e2cc.S
