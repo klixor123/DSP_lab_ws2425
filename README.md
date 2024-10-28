@@ -10,20 +10,17 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Prerequisites for this sample project
 
-1. Unpack GCC
+1. GCC
     - recommended release: 13.3 rel1
     - recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
-1. Unpack OpenOCD 
+1. OpenOCD 
     - recommended location: "C:/OpenOCD/"
-1. Unpack CMake
+1. CMake
     - recommended location: "C:/CMake/"
-1. Install Ninja
+1. Ninja
     - run "winget install Ninja-build.Ninja" in a Terminal
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
-1. Ready for using the project
-    - launch "hello_world.code-workspace"
-    - all required extensions should load automatically
 
 
 
@@ -31,16 +28,14 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Usage of the project
 
+- launch "hello_world.code-workspace"
+- all required extensions should load automatically
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
     - with "IF_DEBUG()", debug_printf() is automatically disabled in Release build
     - debug_printf() works exactly as printf()
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
+- Configure/Reconfigure and build the executable using the CMake extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
-
-Use the CMake extension to:
-1. Configure/Reconfigure
-1. Build the executable
-
 - start debugging with the "Run and Debug" extension.
 - open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
