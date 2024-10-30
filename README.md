@@ -3,7 +3,7 @@
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
-This sample project is _for Windows_. When using Linux (not tested yet), the paths need to be set.  
+This sample project is __for Windows__. When using Linux (not tested yet), the paths need to be set.  
 Find all documentation under "docs/". Most downloads should be available under "downloads/". All [download links](#download-links) are listed below.
 
 
@@ -13,15 +13,15 @@ Find all documentation under "docs/". Most downloads should be available under "
 1. GCC
     - recommended release: 13.3 rel1
     - recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
-    - if deviating, edit in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
+    - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 1. OpenOCD 
     - recommended location: "C:/OpenOCD/"
-    - if deviating, edit in ".vscode/launch.json"
+    - if deviating, edit path in ".vscode/launch.json"
 1. CMake
     - recommended location: "C:/CMake/"
-    - if deviating, edit in "CMakePresets.json"
+    - if deviating, edit path in "CMakePresets.json"
 1. Ninja
-    - if not installed yet, run "winget install Ninja-build.Ninja" in a Terminal
+    - if not installed yet, run (for Windows) "winget install Ninja-build.Ninja" in a Terminal
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
