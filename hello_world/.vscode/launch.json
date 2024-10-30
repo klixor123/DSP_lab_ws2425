@@ -44,18 +44,27 @@
             "type": "cortex-debug",
             "request": "launch",    // launch or attach
             "servertype": "openocd",
-            "serverpath": "C:/OpenOCD/bin/openocd.exe",
 
-            "searchDir": [ 
-                "C:/OpenOCD/share/openocd/scripts",
-            ],
+            "windows": {
+                // location of GDB and other tools
+                "armToolchainPath": "C:/GCC/arm-gnu-toolchain-13.3.rel1/bin",
+        
+                "serverpath": "C:/OpenOCD/bin/openocd.exe",
+                "searchDir": [ "C:/OpenOCD/share/openocd/scripts" ],
+            },
+            "linux": {
+                // location of GDB and other tools
+                "armToolchainPath": "",
+        
+                "serverpath": "",
+                "searchDir": [ "" ],
+            },
+
 
             "configFiles": [
                 "board/spansion_sk-fm4-176l-s6e2cc.cfg",
             ],
 
-            // location of GDB and other tools
-            "armToolchainPath": "C:/GCC/arm-gnu-toolchain-13.3.rel1/bin",
 
             // The following settings use commands expanded by CMake Tools extension.
             // See also https://github.com/microsoft/vscode-cmake-tools/blob/main/docs/cmake-settings.md

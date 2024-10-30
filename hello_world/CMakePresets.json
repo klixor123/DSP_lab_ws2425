@@ -7,9 +7,29 @@
       },
       "configurePresets": [
         {
-            "name": "Base",
+            "name": "OS",
             "hidden": true,
             "cmakeExecutable": "C:/CMake/bin/cmake.exe",
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [ "Windows" ]
+                }
+            }
+        },
+        {
+            "name": "OS",
+            "hidden": true,
+            "cmakeExecutable": "",
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [ "Linux" ]
+                }
+            }
+        },
+        {
+            "name": "Base",
+            "hidden": true,
+            "inherits": "OS",
             "generator": "Ninja",
             "binaryDir": "build/${presetName}",
             "architecture": {

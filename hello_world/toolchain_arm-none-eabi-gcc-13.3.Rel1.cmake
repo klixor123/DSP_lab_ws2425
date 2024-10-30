@@ -14,8 +14,16 @@ set(toolchain_triplet "arm-none-eabi-")
 # https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip
 #
 
-# specify path to toolchain
-set(GCC_ARM_V13_3_R1_ROOT "C:/GCC/arm-gnu-toolchain-13.3.rel1")
+# specify path to toolchain  
+if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+    message(STATUS "OS: Windows")
+    set(GCC_ARM_V13_3_R1_ROOT "C:/GCC/arm-gnu-toolchain-13.3.rel1")
+endif()
+if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    message(STATUS "OS: Linux")
+    set(GCC_ARM_V13_3_R1_ROOT "")
+endif()
+
 
 # Start search in the specified dir, suffix bin will be apppended automatically.
 list(PREPEND CMAKE_PREFIX_PATH ${GCC_ARM_V13_3_R1_ROOT})
