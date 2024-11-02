@@ -54,10 +54,10 @@
             },
             "linux": {
                 // location of GDB and other tools
-                "armToolchainPath": "",
+                "armToolchainPath": "/opt/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin",
         
-                "serverpath": "",
-                "searchDir": [ "" ],
+                "serverpath": "/usr/bin/openocd",
+                "searchDir": [ "/usr/share/openocd/scripts" ],
             },
 
 
