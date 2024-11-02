@@ -3,25 +3,27 @@
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
-This sample project is for Windows only. 
-Find all documentation under "docs/". Most downloads should be available under "downloads/" and all [download links](#download-links) are listed below.
+This sample project is __for Windows__. When using Linux (not tested yet), the paths need to be set.  
+Find all documentation under "docs/". Most downloads should be available under "downloads/". All [download links](#download-links) are listed below.
 
 
 
 # Prerequisites for this sample project
 
-1. Unpack GCC
-    - recommended location: "C:/GCC" 
+1. GCC
     - recommended release: 13.3 rel1
-1. Unpack OpenOCD 
-    - recommended location: "C:/OpenOCD"
-1. Unpack CMake
-    - recommended location: "C:/CMake"
+    - recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
+    - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
+1. OpenOCD 
+    - recommended location: "C:/OpenOCD/"
+    - if deviating, edit path in ".vscode/launch.json"
+1. CMake
+    - recommended location: "C:/CMake/"
+    - if deviating, edit path in "CMakePresets.json"
+1. Ninja
+    - if not installed yet, run (for Windows) "winget install Ninja-build.Ninja" in a Terminal
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
-1. Ready for using the project
-    - launch "hello_world.code-workspace"
-    - all required extensions should load automatically
 
 
 
@@ -29,18 +31,16 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Usage of the project
 
-- use "IF_DEBUG(debug_print())" to sent debugging messages to the Serial Port Monitor
-    - debug_print() is automatically disabled in Release build
-    - debug_print() works exactly as printf()
+- launch "hello_world.code-workspace"
+- all required extensions should load automatically
+- use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
+    - with "IF_DEBUG()", debug_printf() is automatically disabled in Release build
+    - debug_printf() works exactly as printf()
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
-- select "GDB debugger CMSIS-DAP" in the built-in "Run and Debug" extension before debugging
-
-Use the CMake extension to:
-1. Configure/Reconfigure
-1. Build the executable
-1. Debug the program
-
-- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_print()
+- Configure/Reconfigure and build the executable using the CMake extension
+- select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
+- start debugging with the "Run and Debug" extension.
+- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
  
@@ -70,7 +70,7 @@ Use the CMake extension to:
 
 # Flash J-Link FW on MB9AF312K
 
-These instructions should not be needed, but are included for completeness.  
+These instructions should not be needed, but are included for the sake of completeness.  
 Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-ob-spansion/ for more information.
 1. Install "USBVCOM Driver Installer.msi"
 2. Install "FLASH USB DIRECT Programmer.msi"
@@ -98,7 +98,7 @@ instructions:
 
 # How to use Semihosting
 
-These instructions should not be needed, but are included for completeness.  
+These instructions should not be needed, but are included for the sake of completeness.  
 Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Notes_Semihosting.pdf" for more information.
 1. add following code in the file "hello_world/.vscode/launch.json" to the "GDB debugger CMSIS-DAP" configuration
     ```JSON

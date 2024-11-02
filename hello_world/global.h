@@ -12,5 +12,12 @@ extern "C"
 }
 
 
+// CMSIS-DSP
+#include "arm_math.h"
+
+
 // custom
 #include "debug_utils.h"
+
+
+
