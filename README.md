@@ -22,6 +22,7 @@ Find all documentation under "docs/". Most downloads should be available under "
     - unzip and copy/move to recommended location: "C:/OpenOCD/"
     - if deviating, edit path in ".vscode/launch.json"
 1. CMake
+    - recommended version: at least 3.20
     - download from website
     - unzip and copy/move to recommended location: "C:/CMake/"
     - if deviating, edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
@@ -33,8 +34,9 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 ## Linux
 
+The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
 Required packages are: GCC, OpenOCD, CMake and Ninja.
-Run following commands:
+Run the following commands:
 
 ```
 sudo apt update
@@ -47,7 +49,6 @@ To install GCC:
 - download from website, select: x86_64 Linux, AArch32 bare-metal target (arm-none-eabi)
 - unzip and copy/move folder to "/opt/" using `cp -R /opt/`
 - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
-
 
 
 
@@ -76,15 +77,15 @@ To install GCC:
 
 1. Install "FLASH USB DIRECT Programmer.msi"
     - go to "downloads/FM4S6E2GMKitSetup_RevSB/"
-    - run the "FLASH USB DIRECT Programmer.msi"
-1. Download "mb9af31xk_cmsis_dap_v25.srec"
+    - run "FLASH USB DIRECT Programmer.msi"
+1. find "mb9af31xk_cmsis_dap_v25.srec" in "downloads/MB9AF312K_FW/"
 1. Set J4 = 1-2
 1. Set J1 closed
 1. Use USB CN2
 1. Plug device in, check COM Port in Device Manager
-1. Run USBDirect, select MB9AF312K, downloaded .srec file and COM port
+1. Run USBDirect, select MB9AF312K, .srec file and COM port
 1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
-1. Unplug USB
+1. when done, unplug USB
 1. Open J1
 1. Plug device in again
 1. Check Device Manager for "FM-Link/CMSIS-DAP Cypress FM Communications Port" device
@@ -108,7 +109,7 @@ Refer to https://www.segger.com/products/debug-probes/j-link/models/other-j-link
 7. Plug device in, check COM Port in Device Manager
 8. Run USBDirect, select MB9AF312K, downloaded .srec file and COM port
 9. click Full Operation (note: when reset required, unplug and replug USB and quickly press OK)
-10. Unplug USB
+10. when done, unplug USB
 11. Open J1
 12. Plug device in again
 13. Check Device Manager for J-Link device
@@ -152,7 +153,7 @@ Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Note
 
 # Download-Links
 
-check the "downloads/" folder of this sample project before downloading
+check the "downloads/" folder of this sample project before downloading.
 
 GCC toolchain:  
 https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
