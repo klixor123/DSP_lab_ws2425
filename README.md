@@ -25,7 +25,7 @@ Find all documentation under "docs/". Most downloads should be available under "
     - recommended version: at least 3.20
     - download from website
     - unzip and copy/move to recommended location: "C:/CMake/"
-    - if deviating, edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
+    - edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
 1. Ninja
     - if not installed yet, run `winget install Ninja-build.Ninja`
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
