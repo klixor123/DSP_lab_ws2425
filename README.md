@@ -3,8 +3,8 @@
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
-This sample project is __for Windows__. When using Linux (not tested yet), the paths need to be set.  
-Find all documentation under "docs/". Most downloads should be available under "downloads/". All [download links](#download-links) are listed below.
+This sample project is __for Windows__, but Linux is supported.  
+Find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
 
 
 
@@ -32,7 +32,7 @@ Find all documentation under "docs/". Most downloads should be available under "
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 
-## Linux
+## Linux (not tested yet)
 
 The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
 Required packages are: GCC, OpenOCD, CMake and Ninja.
