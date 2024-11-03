@@ -10,25 +10,45 @@ Find all documentation under "docs/". Most downloads should be available under "
 
 # Prerequisites for this sample project
 
+## Windows
+
 1. GCC
     - recommended release: 13.3 rel1
-    - recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
-    - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
-    - (Linux) download from website and copy/move unzipped folder to "/opt/"
+    - download from website, select: Windows, AArch32 bare-metal target (arm-none-eabi)
+    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
     - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 1. OpenOCD 
-    - recommended location: "C:/OpenOCD/"
+    - download from website
+    - unzip and copy/move to recommended location: "C:/OpenOCD/"
     - if deviating, edit path in ".vscode/launch.json"
-    - (Linux) install with "sudo apt update" and "sudo apt install openocd"
 1. CMake
-    - recommended location: "C:/CMake/"
+    - download from website
+    - unzip and copy/move to recommended location: "C:/CMake/"
     - if deviating, edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
-    - (Linux) install with "sudo apt update" and "sudo apt install cmake"
 1. Ninja
-    - if not installed yet, run (for Windows) "winget install Ninja-build.Ninja" in a Terminal
-    - (Linux) install with "sudo apt update" and "sudo apt install ninja-build"
+    - if not installed yet, run `winget install Ninja-build.Ninja`
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
+
+
+## Linux
+
+Required packages are: GCC, OpenOCD, CMake and Ninja.
+Run following commands:
+
+```
+sudo apt update
+sudo apt install openocd
+sudo apt install cmake
+sudo apt install ninja-build
+```
+
+To install GCC:
+- download from website, select: x86_64 Linux, AArch32 bare-metal target (arm-none-eabi)
+- unzip and copy/move folder to "/opt/" using `cp -R /opt/`
+- if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
+
+
 
 
 
