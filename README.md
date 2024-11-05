@@ -57,6 +57,10 @@ To install GCC:
 
 # Usage of the project
 
+- jumper configuration:
+	- J1, J2 open
+	- J4: DAP-5V0
+    - J3: 2-3 
 - launch "hello_world.code-workspace"
 - all required extensions should load automatically
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
