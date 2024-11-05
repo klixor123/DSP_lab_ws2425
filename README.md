@@ -98,6 +98,7 @@ Check for connected USB devices using `lsusb`.
 1. Set J1 closed
 1. Use USB CN2
 1. Plug device in, check COM Port in Device Manager
+    - if not present, run "USBVCOM Driver Installer.msi" from "downloads/FM4S6E2GMKitSetup_RevSB/"
 1. Run USBDirect, select MB9AF312K, .srec file and COM port
 1. click "Full Operation" (note: when reset required, unplug and replug USB and quickly press OK)
 1. when done, unplug USB
