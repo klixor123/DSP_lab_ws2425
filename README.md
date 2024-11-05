@@ -70,7 +70,7 @@ Check for connected USB devices using `lsusb`.
 
 - jumper configuration:
 	- J1, J2 open
-	- J4: DAP-5V0
+	- J4: 1-2
     - J3: 2-3 
 - launch "hello_world.code-workspace"
 - all required extensions should load automatically, install if prompted by VS Code
