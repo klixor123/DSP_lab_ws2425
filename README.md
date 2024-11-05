@@ -3,7 +3,7 @@
 
 This is a basic VS Code sample project for the DSP course at H-KA in Karlsruhe, Germany.  
 The source code in "system/" and "ldscripts/" is provided by Prof. Dr.-Ing. Christian Langen.  
-This sample project is __for Windows__, but Linux is supported.  
+This sample project is for __Windows__, but Linux is supported as well.  
 Find all documentation under "docs/". Some downloads are available under "downloads/". All [download links](#download-links) are listed below.
 
 
@@ -14,25 +14,32 @@ Find all documentation under "docs/". Some downloads are available under "downlo
 
 1. GCC
     - recommended release: 13.3 rel1
-    - download from website, select: Windows, AArch32 bare-metal target (arm-none-eabi)
-    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1/" 
+    - download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+        - section: "Windows (mingw-w64-i686) hosted cross toolchains"
+        - subsection: "AArch32 bare-metal target (arm-none-eabi)"
+        - file: "arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi.zip"
+    - unzip and copy/move to recommended location: "C:/GCC/arm-gnu-toolchain-13.3.rel1-mingw-w64-i686-arm-none-eabi/" 
     - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 1. OpenOCD 
-    - download from website
+    - download from [website](https://github.com/openocd-org/openocd/releases/tag/v0.12.0)
+        - file: "openocd-v0.12.0-i686-w64-mingw32.tar.gz"
+        - Note: version may differ
     - unzip and copy/move to recommended location: "C:/OpenOCD/"
     - if deviating, edit path in ".vscode/launch.json"
 1. CMake
     - recommended version: at least 3.20
-    - download from website
+    - download from [website](https://cmake.org/download/#latest)
+        - file: "cmake-3.30.5-windows-x86_64.zip"
+        - Note: version may differ
     - unzip and copy/move to recommended location: "C:/CMake/"
-    - edit path in VS Code Settings: Cmake Path = "C:/CMake/bin/cmake.exe"
+    - edit path in VS Code Settings: CMake Path = "C:/CMake/bin/cmake.exe"
 1. Ninja
     - if not installed yet, run `winget install Ninja-build.Ninja`
 1. Install "CMSIS-DAP Driver.msi", see "downloads/FM4S6E2GMKitSetup_RevSB"
 1. Check if board identifies as "FM-Link/CMSIS-DAP Cypress FM Communications Port" in Device Manager, if not see [Flash CMSIS-DAP FW on MB9AF312K](#flash-cmsis-dap-fw-on-mb9af312k)
 
 
-## Linux (not tested yet)
+## Linux
 
 The following is specifically for the apt package manager (tested with Ubuntu 22.04 LTS).  
 Required packages are: GCC, OpenOCD, CMake and Ninja.
@@ -43,14 +50,18 @@ sudo apt update
 sudo apt install openocd
 sudo apt install cmake
 sudo apt install ninja-build
+sudo apt install libncursesw5
 ```
 
 To install GCC:
-- download from website, select: x86_64 Linux, AArch32 bare-metal target (arm-none-eabi)
-- unzip and copy/move folder to "/opt/" using `cp -R /opt/`
+- download from [website](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+    - section: "x86_64 Linux hosted cross toolchains"
+    - subsection: "AArch32 bare-metal target (arm-none-eabi)"
+    - file: "arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz"
+- unzip and copy/move folder to "/opt/" using `cp -R arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi /opt/`
 - if deviating, edit path in ".vscode/launch.json" and "toolchain_arm-none-eabi-gcc-13.3.Rel1.cmake"
 
-
+Check for connected USB devices using `lsusb`.
 
 
 
@@ -58,15 +69,15 @@ To install GCC:
 # Usage of the project
 
 - launch "hello_world.code-workspace"
-- all required extensions should load automatically
+- all required extensions should load automatically, install if prompted by VS Code
 - use "IF_DEBUG(debug_printf())" to send messages to the Serial Port Monitor
     - with "IF_DEBUG()", debug_printf() is automatically disabled in Release build
     - debug_printf() works exactly as printf()
 - add each required source file to the "target_sources" commands in "CMakeLists.txt"
-- Configure/Reconfigure and build the executable using the CMake extension
+- Configure/Reconfigure and build the executable using the __CMake__ extension
 - select "GDB debugger CMSIS-DAP" in the "Run and Debug" extension before debugging
 - start debugging with the "Run and Debug" extension.
-- open the VS Code built-in Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
+- open the Serial Port Monitor with the correct COM port to receive messages sent via debug_printf()
 
 
  
@@ -151,9 +162,11 @@ Refer to the file "downloads/FM4_FilterLab_1_3_Template/Eclipse_Application_Note
 
 
 
+
+
 # Download-Links
 
-check the "downloads/" folder of this sample project before downloading.
+Check the "downloads/" folder of this sample project before downloading.
 
 GCC toolchain:  
 https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
@@ -176,3 +189,8 @@ https://www.segger.com/products/debug-probes/j-link/models/other-j-links/j-link-
 J-Link Software and Documentation pack:  
 https://www.segger.com/downloads/jlink/
 
+CMSIS-DSP:  
+https://github.com/ARM-software/CMSIS-DSP
+
+CMSIS:  
+https://github.com/ARM-software/CMSIS_6
