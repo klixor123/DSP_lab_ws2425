@@ -4,48 +4,83 @@
 #define NUM_TAPS_ARRAY_SIZE              32
 #define NUM_TAPS 5
 
-const float32_t firCoeffs32[NUM_TAPS_ARRAY_SIZE] = {
-  -0.0018225230f, -0.0015879294f, +0.0000000000f, +0.0036977508f, +0.0080754303f, +0.0085302217f, -0.0000000000f, -0.0173976984f,
-  -0.0341458607f, -0.0333591565f, +0.0000000000f, +0.0676308395f, +0.1522061835f, +0.2229246956f, +0.2504960933f, +0.2229246956f,
-  +0.1522061835f, +0.0676308395f, +0.0000000000f, -0.0333591565f, -0.0341458607f, -0.0173976984f, -0.0000000000f, +0.0085302217f,
-  +0.0080754303f, +0.0036977508f, +0.0000000000f, -0.0015879294f, -0.0018225230f, 0.0f,0.0f,0.0f
-};
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
-static float32_t firStateF32[2 * BLOCK_SIZE + NUM_TAPS - 1];
+#define SAMPLERATE 96000	// CODEC sampling frequency in Hz, 8000, 32000, 48000 or 96000
+#define TRANSPORT_FREQ 6000
+#define SAMPLEDIVIDER (SAMPLERATE/TRANSPORT_FREQ)
 
-void test_dsp_lib()
+
+
+
+void process_buffer(void)
 {
-    arm_fir_instance_f32 fir_filter;
-    arm_fir_init_f32(&fir_filter, NUM_TAPS, (float32_t *)&firCoeffs32[0], &firStateF32[0], BLOCK_SIZE);
+
+	uint32_t *txbuf, *rxbuf;
+	// int16_t leftChannel, rightChannel;
+	union audio audioIO;
+
+//	gpio_set(TEST_PIN, HIGH);		// toggle TestPin P10 for computing time measurement
+
+	// set txbuf and rxbuf pointer to the active DMA buffer
+	// do not modify
+	if(tx_proc_buffer == PING) txbuf = dma_tx_buffer_ping;
+	else txbuf = dma_tx_buffer_pong;
+
+	if(rx_proc_buffer == PING) rxbuf = dma_rx_buffer_ping;
+	else rxbuf = dma_rx_buffer_pong;
+
+	// enter your data processing algorithms here
+	// in this example we just copy the content of the receive buffer into transmit buffer
+    
+	for(int i=0; i < DMA_BUFFER_SIZE ; i++)
+	{
+        
+		audioIO.audioSample = *rxbuf++;			// fetch audio sample from receive buffer
+
+	}
+	
+    for(int i=0; i < DMA_BUFFER_SIZE ; i++)
+	{
+		
+
+		*txbuf++ = audioIO.audioSample;
+	}
+	// Flags for DMA handling, do not modify
+	tx_buffer_empty = 0;
+	rx_buffer_full = 0;
+
+	gpio_set(LED_B, LOW);		// toggle TestPin P10 for computing time measurement
 }
-
-
 
 
 
 int main()
 {
     // GPIO port configuration for 3 color LED, user button and test pin
-	GpioInit();
+    platform_init(BAUDRATE, SAMPLERATE, line_in, dma, DSTC_I2S_HANDLER_CH0, DSTC_I2S_HANDLER_CH1);
+
+	//GpioInit();
 
     IF_DEBUG(Uart0Init(115200));
 
     IF_DEBUG(debug_printf("Hello World!\n"));
 
-    test_dsp_lib();
+    //test_dsp_lib();
 
-    int i = 0;
+    //int i = 0;
     while(true)
     {
-        gpio_set(LED_B, LOW);			// LED_B on
-        delay_ms(500);
-        gpio_set(LED_B, HIGH);			// LED_B off
-        delay_ms(500);
+        while (!(rx_buffer_full && tx_buffer_empty))
+		{
+            
+        }
 
-        IF_DEBUG(debug_printf("i = %d\n", i));
-        i++;
+		process_buffer();	// Algorithm
+        
     }
 
     return 0;
 }
-
