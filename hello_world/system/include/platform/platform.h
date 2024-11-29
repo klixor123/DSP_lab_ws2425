@@ -29,12 +29,12 @@
 #define DISABLE 0
 
 // DMA with DSTC
-#define DMA_BUFFER_SIZE 512 // 1 - 256 and multiples of 256 (e.g. 512, 768, 1024, ...)
+#define DMA_BUFFER_SIZE 18 // 1 - 256 and multiples of 256 (e.g. 512, 768, 1024, ...)
 #define PING 0x00
 #define PONG 0x01
 
 // initial settings for slider app
-#define BAUDRATE 460800		// UART0 baud rate used for slider app, choose an appropriate value,
+#define BAUDRATE 115200		// UART0 baud rate used for slider app, choose an appropriate value,
 							// typical values for a pc system are 921600, 460800, 230400, 115200 etc.
 #define SLIDER4	24.0		// used for line in gain in function setLIandHPlevels; 23.0: 0 dB, max 31.0: 12 dB, min 0.0: -31.5 db; 1.5 dB steps
 #define SLIDER5	126.0		// used for HP out gain in function setLIandHPlevels; 47.0: mute, 121.0: 0 dB, max 127.0: 6 dB, min 48.0: -73 dB; 1 dB steps

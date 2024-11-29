@@ -33,6 +33,7 @@ list(APPEND include_directories "${CMSISCORE}/Include")
 list(APPEND include_directories "${CMSISDSP}/Include")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/platform")
 list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/S6E2CCA/PDL")
+list(APPEND include_directories "${CMAKE_CURRENT_LIST_DIR}/system/include/kissfft")
 
 
 # build CMSIS-DSP library
@@ -79,8 +80,16 @@ target_sources(${target_name} PRIVATE
     system/include/S6E2CCA/PDL/pdl.c
     system/include/S6E2CCA/PDL/system_s6e2cc.c
     system/include/S6E2CCA/PDL/mfs.c
+    system/include/S6E2CCA/PDL/dstc.c
+    system/include/S6E2CCA/PDL/i2s.c
+    system/include/S6E2CCA/PDL/wm8731.c
+    system/include/S6E2CCA/PDL/interrupts_fm4_type_b.c
+    system/include/S6E2CCA/PDL/clk.c
     system/include/platform/utils.c
     system/include/platform/platform.c
+    system/include/platform/FM4_slider_interface.c
+    system/include/kissfft/kiss_fft.c
+    system/include/kissfft/kiss_fftr.c
     )
 
 # add custom code to the project
@@ -88,6 +97,7 @@ target_sources(${target_name} PRIVATE
     crt_dummy_syscalls.c
     hello_world.cpp
     debug_utils.cpp
+    DSTC_Handler.c
     )
 
 
