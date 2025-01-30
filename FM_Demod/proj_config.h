@@ -7,9 +7,8 @@
 #define SAMPLE_FREQ 48000
 
 #define BLOCK_SIZE  2048
-#define HOP_BUFFER_SIZE (BLOCK_SIZE/4+BLOCK_SIZE)
 #define CARRIER_FREQ 1000
-#define FFT_SIZE 1024             //32, 64, 128, 256, 512, 1024, 2048, 4096
+#define FFT_SIZE 2048            //32, 64, 128, 256, 512, 1024, 2048, 4096
 
 
 #define FG 20000            // Grenzfrequenz in Hz

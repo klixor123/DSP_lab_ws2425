@@ -16,15 +16,16 @@ float32_t current_phase[BLOCK_SIZE];
 float32_t inputComplex[2 * BLOCK_SIZE];
 float32_t HilbertInput[2*BLOCK_SIZE] = {0.0f};
 float32_t HilbertFiltered[BLOCK_SIZE] = {0.0f};
-float32_t filtered_output[BLOCK_SIZE];
 float32_t inst_freq[BLOCK_SIZE];
 float32_t temp[BLOCK_SIZE];
+float32_t mag[BLOCK_SIZE];
+uint32_t fftindex = 0;
+float32_t carrier_Freq = 0.0f;
 float32_t prev_phase = 0.0f;
-float32_t temp_output[BLOCK_SIZE];
 float32_t sum = 0.0f;
 float32_t mean = 0.0f;
 float32_t max = 0.0f;
-float32_t hop_size_temp = 0.0f;
+static float32_t last_phase = 0.0f;
 float coefficients[FILTER_TAPS];
 bool fftflag=0;
 
@@ -92,18 +93,35 @@ const float32_t firCoeffsBP[] = {
 
 void DemodInit()
 {
-	//arm_rfft_fast_init_f32(&fftHandler, FFT_SIZE);
+	arm_rfft_fast_init_f32(&fftHandler, FFT_SIZE);
+	
 	//arm_cfft_init_f32(&arm_cfft_sR_f32_len32, FFT_SIZE); 	
 }
 
 
-float32_t Carrier_Freq(float32_t* cmplx_input)
+float32_t Carrier_Freq(float32_t* input, uint32_t length)
 {
+	float32_t fft_input_buffer[FFT_SIZE];
+	float32_t fft_output_buffer[FFT_SIZE];
+	float32_t fft_magnitude[FFT_SIZE / 2];
 	float32_t magnitude[BLOCK_SIZE];
-	
 
-	arm_cfft_f32(&arm_cfft_sR_f32_len64, cmplx_input, 0, 1);
-	arm_cmplx_mag_f32(cmplx_input, magnitude, BLOCK_SIZE);
+	// Copy input to FFT buffer and zero-pad if necessary
+    for (uint32_t i = 0; i < FFT_SIZE; i++)
+    {
+        if (i < length){
+            fft_input_buffer[i] = input[i];
+        }
+        else
+            fft_input_buffer[i] = 0.0f;
+    }	
+
+	// Perform FFT
+    arm_rfft_fast_f32(&fftHandler, fft_input_buffer, fft_output_buffer, 0);
+
+    // Calculate magnitude
+    arm_cmplx_mag_f32(fft_output_buffer, fft_magnitude, FFT_SIZE / 2);
+
 
 	// Finde die maximale Magnitude und den entsprechenden Index
 	float32_t max_value;
@@ -150,12 +168,12 @@ void arm_chilbert_f32(const arm_cfft_instance_f32* S, float32_t* p1)
 	
 	arm_cfft_f32(S, p1, 1, 1);					
 
-	for(uint16_t i=0; i<BLOCK_SIZE;i++){
-		p1[i]=sqrt(p1[i*2]*p1[i*2]+p1[i*2+1]*p1[i*2+1]);		//MAginute berechnen.
-	}	
+	//for(uint16_t i=0; i<BLOCK_SIZE;i++){
+	//	p1[i]=sqrt(p1[i*2]*p1[i*2]+p1[i*2+1]*p1[i*2+1]);		//MAginute berechnen.
+	//}	
 }
 
-float32_t calculate_instantaneous_frequency(float32_t* phase_current, float32_t* phase_previous) {
+float32_t calculate_instantaneous_frequency(float32_t* phase_current, float32_t* phase_previous, float32_t carrier_Freq) {
 	float32_t delta_phi = (*phase_current - *phase_previous);
 
 
@@ -168,13 +186,13 @@ float32_t calculate_instantaneous_frequency(float32_t* phase_current, float32_t*
 	else if (delta_phi < -M_PI) {
 		delta_phi += 2 * M_PI; // Phasen-Sprung nach oben
 	}
-	float32_t inst_freq = ((delta_phi*SAMPLE_FREQ)/(2*PI*13000)); 
+	float32_t inst_freq = ((delta_phi*SAMPLE_FREQ)/(2*PI*carrier_Freq)); 
 	return inst_freq;
 }
 
 
 #if 1
-void process_demodulation(float32_t input[BLOCK_SIZE], float32_t output[BLOCK_SIZE])
+void process_demodulation(float32_t input[BLOCK_SIZE], float32_t output[BLOCK_SIZE], float32_t carrier)
 { 	
 		
 	arm_fir_init_f32(&firInstance, 117, firCoeffsBP, temp, BLOCK_SIZE);
@@ -187,8 +205,6 @@ void process_demodulation(float32_t input[BLOCK_SIZE], float32_t output[BLOCK_SI
 		//debug_printf("HilbertInput: %f\n", HilbertInput[2*i+1]);
 	}
 	
-	//float32_t carrier_freq =0;
-	//float32_t carrier_freq = Carrier_Freq(HilbertInput);
 
 	arm_chilbert_f32(&arm_cfft_sR_f32_len2048, HilbertInput);				//FFT Länge muss halb so groß sein wie der Input
 	for (int16_t i = 0; i < BLOCK_SIZE; i++)
@@ -199,28 +215,28 @@ void process_demodulation(float32_t input[BLOCK_SIZE], float32_t output[BLOCK_SI
 			prev_phase = current_phase[i-1];
 		}
 		else {
-			prev_phase = current_phase[i];
+			prev_phase = last_phase;
 		}
-		output[i] = (calculate_instantaneous_frequency(&current_phase[i], &prev_phase));
+		output[i] = (calculate_instantaneous_frequency(&current_phase[i], &prev_phase, carrier));
 			
 	}
-	
+	last_phase = current_phase[BLOCK_SIZE-1];
 	//bandpass_filter(output);
 	// Tiefpassfilter
 	arm_fir_init_f32(&firInstance, fir_length, firCoeffs, temp, BLOCK_SIZE);
-	arm_fir_f32(&firInstance, output, filtered_output, BLOCK_SIZE);
+	arm_fir_f32(&firInstance, output, output, BLOCK_SIZE);
 
 	sum = 0.0f;
 	for (int16_t i = 0; i < BLOCK_SIZE; i++) {
-		sum += filtered_output[i];
+		sum += output[i];
 	}
 	mean = sum / BLOCK_SIZE ;
 	for (int16_t i = 0; i < BLOCK_SIZE; i++) {
-		if (filtered_output[i] > 0) {
-			output[i] = filtered_output[i] - mean;
+		if (output[i] > 0) {
+			output[i] = output[i] - mean;
 		}
 		else {
-			output[i] = filtered_output[i] + mean;
+			output[i] = output[i] + mean;
 		}
 	}
 

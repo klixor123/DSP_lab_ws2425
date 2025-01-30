@@ -5,9 +5,6 @@
 
 
 
-
-
-
 // I/O buffer
 
 ping_pong_buffer_instance* input_buffer;
@@ -122,7 +119,8 @@ void process(void)
 	arm_max_f32(leftChannel_f, BLOCK_SIZE, &max, &maxIndex);
 	//process_demodulation(demod_input, demod_output); 
 	if (max > 0.01) {
-		process_demodulation(leftChannel_f, leftDemod_f);
+		float32_t carrier_Freq = Carrier_Freq(leftChannel_f, BLOCK_SIZE);
+		process_demodulation(leftChannel_f, leftDemod_f, carrier_Freq);
 	}
 	else {
 		for (uint16_t i = 0; i < BLOCK_SIZE; i++) {
